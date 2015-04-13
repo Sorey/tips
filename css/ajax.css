@@ -1,0 +1,63 @@
+﻿h1{
+	font-weight:normal;
+	font-size:63px;              // size text and block
+}
+h1 span{
+	font-weight:bolder;
+	color:#0000CD;
+}
+.main{
+	width:960px;
+	margin: auto;
+	height:auto;
+	background:   #B0C4DE;
+	border:2px dashed #0000CD;
+	padding:10px;
+}
+li{                                     // count li = h1
+    margin-left:0px; 
+    list-style-type: none; /* Прячем исходные маркеры */
+}
+li:before{
+    color: red; /* Цвет маркера */
+    content: "◘"; /* Сам маркер */
+    padding-right: 3px; /* Расстояние от маркера до текста */
+}
+ul{
+	color:blue;
+	padding: 0 5px;
+}
+.title1{
+	padding-left:5px;
+	width:23%;
+	border:2px dotted  #AFEEEE;
+}
+.title2{
+	width:75%;
+	float:right;
+	text-align:center;
+	border:2px dotted  #AFEEEE;
+}
+h2{
+	color:white;
+	background:#4682B4;
+	line-height:2;
+	padding-left:10px;
+}
+.textcode{
+	padding-left:30px;
+}	
+.bodyitem{
+	padding: 0 15px;
+	border:2px dotted #c0ff3e;
+	background: white;
+}
+p{
+	font-size:20px;
+	text-align:justify;
+}
+pre{
+	margin-left:0px;
+	margin:-15px 0px;
+	color:#2F4F4F;
+}

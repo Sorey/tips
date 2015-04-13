@@ -1,0 +1,64 @@
+﻿<html>
+	<head>
+		<title>Ajax1</title>
+		<link href="ajax1.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<div class = "main">
+			<div class = "title2">
+				<h1>Getting Started with <span>Ajax</span></h1>
+			</div>
+			<div class = "title1">
+				<ul type ="square"><b>CONTENTS INCLUDE:</b>
+					<li>Getting to Know HTTP</li>
+					<li>Tips for Using XHR</li>
+					<li>Ajax and Architecture</li>
+					<li>Ajax Toolkits</li>
+					<li>Ajax User Interfaces</li>
+					<li>Hot Tips and more...</li>
+				</ul>
+			</div>
+			<div class = "bodyitem">
+				<h2>GETTING STARTED</h2>
+				<p>
+					The standard way to do Ajax is to use the XMLHttpRequest object,
+known as XHR by its friends. Use XHR directly, or via one of the
+helpful Ajax libraries such as Prototype or jQuery. How do we use
+XHR “by hand”? To start with, we need to get a reference to it:
+				</p>
+				<pre class = "textcode">
+if (window.XMLHttpRequest) {
+   xhr = new XMLHttpRequest();
+} else if (window.ActiveXObject) {
+   xhr = new ActiveXObject(“Microsoft.XMLHTTP”);
+}
+</pre>
+				<p>We can then open a connection to a URL:</p>
+				<pre class = "textcode">
+xhr.open(
+   “GET”,
+   “my-dynamic-content.jsp?id=”
+      +encodeURI(myId),
+   true
+);				
+</pre>
+				<p>Specify a callback function to receive the response:</p>
+				<pre class = "textcode">
+xhr.onreadystatechange = function(){
+   processReqChange(req);
+}				
+</pre>
+				<p>and then send the request:</p>
+				<pre class = "textcode">
+xhr.send(null);
+</pre>				
+				<p>The server may be busy, or the network may be slow. We don’t want
+to sit around doing nothing until the response arrives, and because
+we’ve assigned the callback function, we don’t have to. That’s the
+five-minute guide for the impatient. For those who like to know
+the details, we’ve listed the fuller details of the XHR object below.
+				</p>
+			</div>
+		</div>
+	</body>
+</html>
