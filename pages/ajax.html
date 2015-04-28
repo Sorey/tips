@@ -5,59 +5,1060 @@
 	</head>
 	<body>
 		<div class = "main">
-			<div class = "title2">
-				<h1>Getting Started with <span>Ajax</span></h1>
+			<div class = "topic">
+				<h1><span class = "part1" >Getting Started with </span><span class = "part2"> Ajax </span></h1>
 			</div>
-			<div class = "title1">
+			<div class = "list_titles">
 				<ul type ="square"><b>CONTENTS INCLUDE:</b>
-					<li>Getting to Know HTTP</li>
-					<li>Tips for Using XHR</li>
-					<li>Ajax and Architecture</li>
-					<li>Ajax Toolkits</li>
-					<li>Ajax User Interfaces</li>
-					<li>Hot Tips and more...</li>
+					<li><a href = "#HTTP">Getting to Know HTTP</a></li>
+					<li><a href = "#XHR">Tips for Using XHR</a></li>
+					<li><a href = "#ARCH">Ajax and Architecture</a></li>
+					<li><a href = "#TOOL">Ajax Toolkits</a></li>
+					<li><a href = "#UI">Ajax User Interfaces</a></li>
+					<li><a href = "#Hot">Hot Tips and more...</a></li>
 				</ul>
 			</div>
 			<div class = "bodyitem">
 				<h2>GETTING STARTED</h2>
-				<p>
-					The standard way to do Ajax is to use the XMLHttpRequest object,
-known as XHR by its friends. Use XHR directly, or via one of the
-helpful Ajax libraries such as Prototype or jQuery. How do we use
-XHR “by hand”? To start with, we need to get a reference to it:
-				</p>
-				<pre class = "textcode">
+				<div class = "text">
+				<p>The standard way to do Ajax is to use the XMLHttpRequest object, known as XHR by its friends. Use XHR directly, or via one of the helpful Ajax libraries such as Prototype or jQuery. How do we use XHR “by hand”? To start with, we need to get a reference to it: </p>
+					<table class = "table_code">
+						<tr>
+							<td>					
+								<pre class = "pre_textcode">
 if (window.XMLHttpRequest) {
    xhr = new XMLHttpRequest();
 } else if (window.ActiveXObject) {
    xhr = new ActiveXObject(“Microsoft.XMLHTTP”);
 }
 </pre>
-				<p>We can then open a connection to a URL:</p>
-				<pre class = "textcode">
+							</td>
+						</tr>
+					</table>
+					<p>We can then open a connection to a URL:</p>
+					<table class = "table_code">
+						<tr>
+							<td>
+								<pre class = "pre_textcode">
 xhr.open(
    “GET”,
    “my-dynamic-content.jsp?id=”
-      +encodeURI(myId),
+	  +encodeURI(myId),
    true
 );				
 </pre>
-				<p>Specify a callback function to receive the response:</p>
-				<pre class = "textcode">
+							</td>
+						</tr>
+					</table>		
+					<p>Specify a callback function to receive the response:</p>
+					<table class = "table_code">
+						<tr>
+							<td>					
+								<pre class = "pre_textcode">
 xhr.onreadystatechange = function(){
    processReqChange(req);
 }				
 </pre>
-				<p>and then send the request:</p>
-				<pre class = "textcode">
+							</td>
+						</tr>
+					</table>
+					<p>and then send the request:</p>
+					<table class = "table_code">
+						<tr>
+							<td>					
+					<pre class = "pre_textcode">
 xhr.send(null);
-</pre>				
-				<p>The server may be busy, or the network may be slow. We don’t want
-to sit around doing nothing until the response arrives, and because
-we’ve assigned the callback function, we don’t have to. That’s the
-five-minute guide for the impatient. For those who like to know
-the details, we’ve listed the fuller details of the XHR object below.
-				</p>
+</pre>	
+							</td>
+						</tr>
+					</table>			
+					<p>The server may be busy, or the network may be slow. We don’t want to sit around doing nothing until the response arrives, and because we’ve assigned the callback function, we don’t have to. That’s the five-minute guide for the impatient. For those who like to know the details, we’ve listed the fuller details of the XHR object below. </p>
+				</div>
+				<table class = "table_text">
+					<tr>
+						<th>Method Name</th>
+						<th>Parameters and Descriptions</th>						
+					</tr>
+					<tr>
+						<td>open(method, url, async)</td>
+						<td>open a connection to a URL method = HTTP verb (GET, POST, etc.) url = url to open, may include querystring async = whether to make asynchronous request</td>
+					</tr>
+					<tr>
+						<td>onreadystatechange</td>
+						<td>assign a function object as callback (similar to onclick, onload, etc. in browser event model)</td>
+					</tr>
+					<tr>
+						<td>setRequestHeader (namevalue)</td>
+						<td>add a header to the HTTP request</td>
+					</tr>
+					<tr>
+						<td>send(body)</td>
+						<td>send the request body = string to be used as request body</td>
+					</tr>
+					<tr>
+						<td>abort()</td>
+						<td>stop the XHR from listening for the response</td>
+					</tr>
+					<tr>
+						<td>readyState</td>
+						<td>stage in lifecycle of response (only populated after send() is called)</td>
+					</tr>
+					<tr>
+						<td>httpStatus</td>
+						<td>The HTTP return code (integer, only populated after response reaches the loaded state)</td>
+					</tr>
+					<tr>
+						<td>responseText</td>
+						<td>body of response as a JavaScript string (only set after response reaches the interactive readyState)</td>
+					</tr>
+					<tr>
+						<td>responseXML</td>
+						<td>body of the response as a XML document object (only set after response reaches the interactive readyState)</td>
+					</tr>
+					<tr>
+						<td>getResponseHeader (name)</td>
+						<td>read a response header by name</td>
+					</tr>
+					<tr>
+						<td>getAllResponseHeaders()</td>
+						<td>Get an array of all response header names</td>
+					</tr>
+				</table>
+				<span id = "HTTP" ></span>
+				<h2>GETTING TO KNOW HTTP</h2>
+				<div class = "text">
+					<p>To make use of the XHR to its fullest, we recommend you become familiar with the workings of the HTTP protocol. Using Ajax, you have much more control over HTTP than with classic web app development.</p>
+					<div>
+						<img src = "../images/aljax/image1.jpg"></img>
+					</div>
+					<ul type ="square">HTTP is a stateless request-response protocol.
+						<li>Both request and response contain headers and an optional body, which is free text.</li>
+						<li>Only a POST request contains a body.</li>
+						<li>A request defines a verb or method.</li>
+						<li>The Mime type of request and response can be set by the header Content-type</li>
+					</ul>
+				</div>
+				<span id = "Hot" ></span>
+				<div class="hot_tip clearfix">
+					<div class="hot_tip_hot">Hot Tip</div>
+					<div class="hot_tip_ppp">
+						<p>Not all Microsoft browsers rely on ActiveX.</p>
+						<p>IE7 provides a native JavaScript XHR, so we check for that first.</p>
+					</div>
+				</div>
+				<div class = "text">
+					<h3>Common HTTP Verbs</h3>
+					<p>99% of the time, you’ll only need GET and POST. Many other verbs are used by WebDAV, Subversion over HTTP, and other niche applications, but not all web servers will understand them.</p>
+				</div>
+				<table class = "table_text">
+					<tr>
+						<th>Verb</th>
+						<th>Notes</th>						
+					</tr>
+					<tr>
+						<td>GET</td>
+						<td>Strictly speaking, should be used only to fetch data, not to effect changes on the server. GET requests contain no body. Parameters are passed in the querystring of the URL.</td>
+					</tr>	
+					<tr>
+						<td>POST</td>
+						<td>Should be used to update data on the server. Parameters/data passed in the body.</td>
+					</tr>
+					<tr>
+						<td>HEAD</td>
+						<td>Will fetch the headers of the response only, not the body. Useful for finding out how large a resource is (read the Content-length header) or how old it is (read the Last-modified header), for example.</td>
+					</tr>
+				</table>
+				<div class = "text">
+					<p>If you’re using the increasingly popular REST approach to web services, the HTTP verb is used to indicate the type of operation being performed. The most commonly used HTTP verbs in REST map onto the CRUD (create, read, update, delete) approach:</p>
+				</div>
+				<table class = "table_text">
+					<tr>
+						<th>HTTP Verb</th>
+						<th>CRUD operation</th>
+						<th>Notes</th>							
+					</tr>
+					<tr>
+						<td>PUT</td>
+						<td>Create</td>
+						<td>Add a new object instance to the domain model.</td>
+					</tr>					
+					<tr>
+						<td>GET</td>
+						<td>Read</td>
+						<td>Get an existing domain object from the server.</td>
+					</tr>	
+					<tr>
+						<td>POST</td>
+						<td>Update</td>
+						<td>Modify an existing domain object.</td>
+					</tr>
+					<tr>
+						<td>DELETE</td>
+						<td>Delete</td>
+						<td>Remove an existing object from the domain model.</td>
+					</tr>					
+				</table>
+				<div class = "text">
+					<h3>Common Mime Types</h3>
+					<p>Setting the right mime type for your request and response is good manners—it’s also vital to get the app to behave correctly!</p>
+				</div>
+				<table class = "table_text">
+					<tr>
+						<th>Mime Type</th>
+						<th>Meaning</th>
+						<th>Usage</th>							
+					</tr>
+					<tr>
+						<td>application/x-www-form-urlencoded</td>
+						<td>Body is an encoded querystring of key-value pairs</td>
+						<td>Sending request from HTML form or Ajax. Required in order for server to decode parameters into $_GET, servlet parameters, or HttpRequest.Form.</td>
+					</tr>					
+					<tr>
+						<td>text/xml, application/xml</td>
+						<td>Body is an XML document</td>
+						<td>Can be used anywhere – request or response. Must set response to one of these in order to use XHR.responseXML property.</td>
+					</tr>	
+					<tr>
+						<td>text/plain</td>
+						<td>Body is plain unformatted text</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>text/html, text/xhtml</td>
+						<td>Body is (X)HTML content</td>
+						<td>Standard web pages sent from server, or content fragments sent to Ajax apps.</td>
+					</tr>
+					<tr>
+						<td>text/javascript</td>
+						<td>Body is a piece of JavaScript code</td>
+						<td>Standard .js files, JavaScript fragments sent to Ajax apps.</td>
+					</tr>			
+					<tr>
+						<td>image/png, image/jpeg, image/gif</td>
+						<td>Body is a binary image</td>
+						<td>Images sent by server.</td>
+					</tr>										
+				</table>
+				<span id = "XHR" ></span>
+				<h2>TIPS FOR USING XHR</h2>
+				<div class = "text">
+					<ul type ="square">
+						<li>Always set async to true when calling open(). Synchronous Ajax requests block the browser UI, giving the stop-start behaviour we were trying to get away from in the first place!</li>
+						<li>XHR can be fussy about order of setting-up. Always set the callback handler before calling send()</li>
+						<li>To send HTML-form like data
+							<ul>
+								<li>Use encodeURI() to encode all data values</li>
+								<li>Set the mime-type of the request to application/x-www-form-urlencoded</li>
+							</ul>
+						</li>
+						<li>Set the response mime type to application/xml or text/xml if you want to use the responseXML property</li>
+					</ul>
+					<h3>Handling the Response</h3>
+					<p>We’ve assigned a callback handler function to our XHR object. This function will get called several times as the response comes in. Typically, we only want to parse the response once it has fully arrived, i.e. the readyState is complete.</p>
+					<table class = "table_code">
+						<tr>
+							<td>					
+								<pre class = "pre_textcode">
+xhr.onreadystatechange=function(){
+   if (xhr.readyState==4){
+      if (xhr.status==200){
+         parseResponse(xhr);
+      }else{
+         //handle the HTTP error...
+      }
+   };
+};
+</pre>
+							</td>
+						</tr>
+					</table>
+					<h3>XHR ReadyState Values</h3>
+					<p>If you’re using the increasingly popular REST approach to web services, the HTTP verb is used to indicate the type of operation being performed. The most commonly used HTTP verbs in REST map onto the CRUD (create, read, update, delete) approach:</p>
+				</div>
+				<table class = "table_text">
+					<tr>
+						<th>State</th>
+						<th>Value</th>
+						<th>Comments</th>							
+					</tr>
+					<tr>
+						<td>0</td>
+						<td>Uninitialized</td>
+						<td>The request hasn’t yet been sent</td>
+					</tr>					
+					<tr>
+						<td>1</td>
+						<td>Loading</td>
+						<td>The response hasn’t yet arrived</td>
+					</tr>	
+					<tr>
+						<td>2</td>
+						<td>Loaded</td>
+						<td>Response headers can be read</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Interactive</td>
+						<td>Response body is incomplete, but can be read</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>Complete</td>
+						<td>Response body is complete</td>
+					</tr>
+				</table>
+				<div class = "text">
+					<p>So, what might the parseResponse() method look like? We have a lot of freedom in the types of response we send. Let’s look at some of the common ones.</p>
+					<h3>Handling a HTML Response</h3>
+					<p>The server can send pre-assembled HTML content, which we just stitch into the web page.</p>
+				</div>
+				<table class = "table_code">
+					<tr>
+						<td>
+							<pre class = "pre_table_code">
+&lt;table class=’item selected’&gt;
+&lt;tr&gt;
+&lt;td rowspan=’3’ valign=’top’>&lt;div class=’itemIcon’>&lt;img src=’../images/kmoon.png’>&lt;/div>&lt;/td&gt;
+&lt;td class=’itemTitle’&gt;The Moon on a Stick&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td valign=’top’&gt;What every project manager wants - and they want it yesterday!&lt;br/>&lt;br/>&lt;i&gt;NB: Stick not included.&lt;/i>&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td>&lt;div class=’price’>$365.00&lt;/div>&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+						</td>
+						<td>
+							<pre>
+function parseResponse(xhr){
+   var div=document
+      .getElementById(“myDiv”);
+   div.innerHTML=xhr.responseText;
+}							
+</pre>
+						</td>
+					</tr>
+				</table>
+				<div class = "text">
+					<h3>Handling a JSON Response</h3>
+					<p>JSON is a simple text-markup that’s extremely easy for JavaScript to digest! It doesn’t come so naturally to server-side languages, but there are JSON libraries for most servers these days—see http://www.json.org. Most Ajax libraries now provide support for JSON.</p>
+				</div>	
+				<table class = "table_code">
+					<tr>
+						<td>
+							<pre class = "pre_table_code">
+{
+   imgSrc: “kmoon.png”,
+   title: “The Moon on a Stick”,
+   description: “What every project manager wants - and they want it yesterday!&lt;br/&gt;&lt;br/&gt;&lt;i&gt;NB: Stick not included.&lt;/i&gt;”,
+   price: “365.00”
+}
+</pre>
+						</td>
+						<td>
+							<pre>
+function parseResponse(xhr){
+   var jsonObj=eval(
+     “(“
+     +xhr.responseText
+     +”)”
+   );
+   setImgSrc(jsonObj.imgSrc);
+   setTitle(jsonObj.title);
+}						
+</pre>
+						</td>
+					</tr>
+				</table>	
+				<div class = "text">
+					<h3>Handling an XML Response</h3>
+					<p>XML is a more natural fit for most server technologies. XHR supports XML by giving us the responseXML property, but parsing this using the DOM is hard work.</p>
+				</div>	
+				<table class = "table_code">
+					<tr>
+						<td>
+							<pre class = "pre_table_code">
+&lt;item imgSrc=”kmoon.png” price=”365.00”&gt;
+   &lt;title&gt;The Moon on a Stick&lt;/title&gt;
+   &lt;description>&lt;![CDATA[What every project manager wants - and they want it yesterday!&lt;br/&gt;&lt;br/&gt;&lt;i&gt;NB: Stick not included.&lt;/i&gt;]]&gt;&lt;/description&gt;
+&lt;/item&gt;
+</pre>
+						</td>
+						<td>
+							<pre>
+function parseResponse(xhr){
+   var xmlDoc=xhr.responseXML;
+   var item=xmlDoc.getElementsByTagName
+      (‘item’)[0];
+   var imgSrc=item.getAttribute
+      (‘imgSrc’);
+   var title=item.getElementsByTagName
+      (‘title’)[0]
+      .firstChild.data;
+   setImgSrc(imgSrc);
+   setTitle(title);
+}						
+</pre>
+						</td>
+					</tr>
+				</table>	
+				<div class = "text">
+					<p>Some browsers also support XPath as a more pleasant way to parse XML. Sarissa and mozXPath.js both provide cross-browser XPath support.</p>
+				</div>	
+				<table class = "table_code">
+					<tr>
+						<td>
+							<pre class = "pre_table_code">
+&lt;item imgSrc=”kmoon.png” price=”365.00”&gt;
+   &lt;title&gt;The Moon on a Stick&lt;/title&gt;
+   &lt;description&gt;&lt;![CDATA[What every project manager wants - and they want it yesterday!&lt;br/&gt;&lt;br/&gt;&lt;i&gt;NB: Stick not included.&lt;/i&gt;]]&gt;&lt;/description&gt;
+&lt;/item&gt;
+</pre>
+						</td>
+						<td>
+							<pre>
+function parseResponse(xhr){
+   var xmlDoc=xhr.responseXML;
+   var imgSrc=xmlDoc.selectSingleNode
+      (‘/item/@imgSrc’).value;
+   var title=xmlDoc.selectSingleNode
+      (‘/item/title/text()’).value;
+   setImgSrc(imgSrc);
+   setTitle(title);
+}					
+</pre>
+						</td>
+					</tr>
+				</table>
+				<div class = "text">
+					<h3>Handling a Javascript Response</h3>
+					<p>Another approach to Ajax is to generate scripts on the server, and send them to the client to be evaluated. Care should be taken here to define a suitably high-level API on the client against which the generated script is to run, otherwise tight coupling between server and client code can result.</p>
+				</div>	
+				<table class = "table_code">
+					<tr>
+						<td>
+							<pre class = "pre_table_code">
+setImgSrc(“kmoon.png”);
+setTitle(
+   “The Moon on a Stick”
+);
+</pre>
+						</td>
+						<td>
+							<pre>
+function parseResponse(xhr){
+   eval(xhr.responseText);
+}				
+</pre>
+						</td>
+					</tr>
+				</table>
+				<div class = "text">
+					<h3>Handling Mixed Responses</h3>
+					<p>Some Javascript libraries allow mixing of these dialects of Ajax within a single response. The Prototype Ajax.Updater, for example, can accept a response as HTML, into which &lt;script&gt; tags are embedded. The script will be extracted and evaluated, while the rest of the content is embedded into a target DOM element.</p>
+				</div>
+				<span id ="ARCH"></span>
+				<h2>AJAX AND ARCHITECTURE</h2>
+				<div class = "text">
+					<p>Does Ajax only affect the client-side? Certainly not! Particularly if your server is responding with data rather than HTML fragments, you’ll want to refactor to some extent.</p>
+					<div>
+						<img src = "../images/aljax/image2.jpg"></img>
+					</div>
+					<ul type ="square"><b>Dumb client</b> and <b>thick client</b> above are extremes. In between, there is a thinner (but still intelligent) client, that will suffice in many cases. No single model is right for all cases. Try out these rules of thumb:
+						<li>To add small Ajax features to an existing app, stick with the thin client approach. Thick client is for complex, line-of-business app replacements.</li>
+						<li>Your client-side code is visible, and runs on somebody else’s machine. Don’t expose details of your business tier. Keep it coarse-grained.</li>
+						<li>Some functionality MUST be kept on the server, such as data validation. Simple, fast validation on the client is an addition, not a replacement!</li>
+						<li>Treat your client-side code well. Use the patterns and practises that you would use on the server to keep your code clean and maintainable.</li>
+						<li>Most projects have a legacy system behind them. How can you introduce Ajax with minimal disruption? Does it speak XML, or generate HTML from components? Can you re-use that?</li>
+					</ul>
+				</div>
+				<span id = "TOOL"></span>
+				<h2>AJAX TOOLKITS</h2>
+				<div class = "text">
+					<ul type ="square" class = "padding_toolkits">Toolkits and frameworks will make your life easier in several ways:
+						<li>Providing tried-and-tested solutions to common problems</li>
+						<li>Abstracting away cross-browser incompatibilities and annoyances</li>
+						<li>Providing higher level abstractions such as ready-made UI widgets and networking stacks</li>
+					</ul>
+					<h3>Client-side versus Server-side</h3>
+					<p>Some toolkits are JavaScript-only, others include a back-end system too. Client-side toolkits will give more flexibility, but may require more work on the server-side too.</p>					
+					<h3>High-level versus Low-level</h3>
+					<p>JavaScript is a flexible language, and some toolkits are geared towards enhancing the language itself in a variety of ways. Others are more concerned with higher-level issues such as simplifying XHR, or providing drop-in widgets such as trees, tables and drag-and-drop.</p>					
+					<h3>Some popular Ajax Toolkits</h3>
+					<p></p>
+				</div>
+				<table class = "table_text">
+					<tr>
+						<th>Name</th>
+						<th>Client/ Server</th>
+						<th>High/ Low-level</th>	
+						<th>Comments</th>		
+					</tr>
+					<tr>
+						<td>Prototype (http://prototypejs.org)</td>
+						<td>Client</td>
+						<td>Low</td>
+						<td>Remodels and extends JavaScript following the Ruby scripting language. Many features for arrays, functions, XHR, DOM and forms.</td>
+					</tr>					
+					<tr>
+						<td>Scriptaculous (http://script.aculo.us)</td>
+						<td>Client</td>
+						<td>High</td>
+						<td>Special effects, drag and drop, and widgets built on top of prototype.</td>
+					</tr>	
+					<tr>
+						<td>dojo (http://dojotoolkit.org)</td>
+						<td>Client</td>
+						<td>Low-high</td>
+						<td>Comprehensive set of libraries covering everything from packaging & language features through Ajax to UI widgets.</td>
+					</tr>
+					<tr>
+						<td>Yahoo User Interface (YUI) (http://developer.yahoo.com/yui/)</td>
+						<td>Client</td>
+						<td>Low-high</td>
+						<td>Another comprehensive set of libraries covering many aspects of Ajax development.</td>
+					</tr>
+					<tr>
+						<td>Ext (http://extjs.com)</td>
+						<td>Client</td>
+						<td>High</td>
+						<td>Widget-based set of user interface components with Ajax support.</td>
+					</tr>			
+					<tr>
+						<td>sarissa (http://sarissa.sf.net)</td>
+						<td>Client</td>
+						<td>Low</td>
+						<td>Rich library for working with XML, providing cross-browser XPath and XSLT.</td>
+					</tr>	
+					<tr>
+						<td>Mochikit (http://mochikit.com)</td>
+						<td>Client</td>
+						<td>Low-high</td>
+						<td>General-purpose Ajax and DHTML library, inspired by Python.</td>
+					</tr>
+<tr>
+						<td>jQuery (http://jquery.com)</td>
+						<td>Client</td>
+						<td>Low</td>
+						<td>Small, concise Ajax and DOM helper library.</td>
+					</tr>
+					<tr>
+						<td>MooTools (http://mootools.net)</td>
+						<td>Client</td>
+						<td>Low-high</td>
+						<td>Modular library covering everything from core classes to special effects. A promising newcomer.</td>
+					</tr>
+					<tr>
+						<td>Ruby on Rails (http://www.rubyonrails.org)</td>
+						<td>Server</td>
+						<td>Low-high</td>
+						<td>Primarily a server-side toolkit, but has first-rate support for Ajax, using Prototype and Scriptaculous. Allows large parts of the client tier to be written on the server, in Ruby.</td>
+					</tr>
+					<tr>
+						<td>GWT (http://code.google.com/webtoolkit)</td>
+						<td>Client</td>
+						<td>High</td>
+						<td>Java framework that allows Ajax client tier to be written in Java.</td>
+					</tr>
+					<tr>
+						<td>JSF (various vendors)</td>
+						<td>Server</td>
+						<td>High</td>
+						<td>Various JSF vendors have Ajax-enabled some of their components, again allowing some Ajax functionality without hand-writing JavaScript.</td>
+					</tr>
+				</table>
+				<div class = "text">
+					<p>We haven’t time to show you how to make Ajax calls with all of these toolkits, but let’s pick two of the most popular: Prototype and jQuery.</p>
+					<h3>The Basics : Making an Ajax request</h3>
+					<p></p>
+				</div>
+				<table class = "table_code">
+					<tr>
+						<th>Prototype</th>
+						<th>jQuery</th>
+					</tr>
+					<tr>
+						<td>
+							<pre class = "pre_table_code">
+new Ajax.Request(
+   “my-dynamic-content.jsp”,
+   { method: “post”,
+      params: { id: myId },
+      onComplete: function(response){
+         parseResponse(response);
+      }
+   }
+);
+</pre>
+						</td>
+						<td>
+							<pre>
+$.post(
+   “my-dynamic-content.jsp”,
+   { id: myId },
+   function(xhr){
+      parseResponse(xhr);
+   }
+);				
+</pre>
+						</td>
+					</tr>
+				</table>
+				<div class = "text">
+					<ul type ="square" >
+						<li>No need to create your own XHR object</li>
+						<li>Use high-level, meaningful callbacks rather than onreadystatechange</li>
+						<li>Sensible defaults provided for all the options you don’t want to specify yourself</li>
+					</ul>					
+					<h3>Loading HTML Content into a DOM Node</h3>
+					<p></p>
+				</div>
+				<table class = "table_code">
+					<tr>
+						<th>Prototype</th>
+						<th>jQuery</th>
+					</tr>
+					<tr>
+						<td>
+							<pre class = "pre_table_code">
+new Ajax.Updater(
+   $(“myDomNode”),
+   “my-dynamic-content.jsp”,
+   { method: “post”,
+      params: { id: myId }
+   }
+);
+</pre>
+						</td>
+						<td>
+							<pre>
+$(“#myDomNode”).load(
+   “my-dynamic-content.jsp”,
+   { id: myId }
+);				
+</pre>
+						</td>
+					</tr>
+				</table>
+				<div class = "text">
+					<ul type ="square" >
+						<li>No need to provide a callback function at all</li>
+					</ul>					
+					<h3>Working wth JSON Responses</h3>
+					<p></p>
+				</div>
+				<table class = "table_code">
+					<tr>
+						<th>Prototype</th>
+						<th>jQuery</th>
+					</tr>
+					<tr>
+						<td>
+							<pre class = "pre_table_code">
+new Ajax.Request(
+   “my-dynamic-content.jsp”,
+   { method: “post”,
+      params: { id: myId },
+      onComplete: function(response,json){
+         alert(json.someProperty);
+      }
+   }
+);
+</pre>
+						</td>
+						<td>
+							<pre>
+$.getJSON(
+   “my-dynamic-content.jsp?id=”+myId,
+   function(json){
+     alert(json.someProperty);
+   }
+);			
+</pre>
+						</td>
+					</tr>
+				</table>
+				<div class = "text">
+					<ul type ="square" >
+						<li>JSON response returned to our callback already parsed</li>
+					</ul>					
+				</div>
+				<h2>GENERAL JAVASCRIPT PROGRAMMING TIPS</h2>
+				<div class = "text">
+					<ul type ="square">JavaScript is a loosely-typed scripting language with support for object-oriented and functional programming styles. Although it looks like Java and C-family languages, it’s quite different under the hood. Here are a few survival tips to get you through your first serious encounter with this language:
+						<li>Objects can be extended at runtime with new properties. Think of Javascript objects as associative arrays.</li>
+						<li>Functions are first-class objects, and can be passed as arguments into other functions (see the numerous callback functions earlier).</li>
+						<li>JavaScript functions support closures. That is, variables that are in scope when a function is defined can still be referenced inside the function, even if it is invoked later.</li>
+					</ul>
+				</div>
+				<span id = "UI"></span>
+				<h2>AJAX USER INTERFACES</h2>
+				<div class = "text">
+					<p>Before Ajax, the UI was nearly always delivered as declarative HTML, and the Document Object Model, or DOM, was only used in moderation. With Ajax—especially single-page applications— the DOM can play a much bigger role.</p>
+					<ul type ="square" >Working with the DOM is a two-stage process:
+						<li>Finding the elements we want to work with</li>
+						<li>Modifying their contents or reorganizing them</li>
+					</ul>					
+					<h3>Finding DOM Elements</h3>
+					<p>Some toolkits are JavaScript-only, others include a back-end system too. Client-side toolkits will give more flexibility, but may require more work on the server-side too.</p>					
+					<h3>High-level versus Low-level</h3>
+					<p>The DOM standard itself gives us a few basic tools to work with. Enterprising JavaScript library developers have built on top of these to provide a much richer set of functionality.</p>					
+				</div>
+				<table class = "table_text">
+					<tr>
+						<th>Function</th>
+						<th>arguments</th>
+						<th>returns</th>	
+						<th>notes</th>		
+					</tr>
+					<tr>
+						<td>document.<br />getElementById()</td>
+						<td>string</td>
+						<td>DOM Element</td>
+						<td>find single element on page. Id attribute must be unique in page</td>
+					</tr>					
+					<tr>
+						<td>document.<br />getElementsByTagName()<br />element.<br />getElementsByTagName()</td>
+						<td>string</td>
+						<td>collection of DOM elements</td>
+						<td>find all elements on page of a particular HTML tag type e.g. H1, IMG, LI. Use as a method of element to search a subtree of the document</td>
+					</tr>	
+					<tr>
+						<td>element.childNodes</td>
+						<td>none</td>
+						<td>collection of DOM elements</td>
+						<td>find node’s immediate children</td>
+					</tr>
+					<tr>
+						<td>element.parentNode</td>
+						<td>none</td>
+						<td>DOM Element</td>
+						<td>find node’s immediate parent</td>
+					</tr>
+					<tr>
+						<td>element.nextSibling element.previousSibling</td>
+						<td>none</td>
+						<td>DOM Element</td>
+						<td>allow traversal of sibling nodes</td>
+					</tr>
+				</table>	
+				<div class = "text">
+					<p>The id attribute is often too specific—adding one to each element we may need to locate becomes tedious, and clutters the markup. Tag names, on the other hand, are not specific enough to be useful in many cases. The most common solution is to use CSS classes to locate elements. We can make these as specific or general as we need.</p>
+					<h3>Finding DOM elements using Prototype</h3>
+					<p></p>
+				</div>		
+				<table class = "table_text">
+					<tr>
+						<th>Function</th>
+						<th>arguments</th>
+						<th>returns</th>	
+						<th>notes</th>		
+					</tr>
+					<tr>
+						<td>$()</td>
+						<td>string, many strings, or elements</td>
+						<td>DOM element, or array of elements</td>
+						<td>powerful and concise superset of getElementById()</td>
+					</tr>					
+					<tr>
+						<td>document.<br />getElementsByClassName()<br /> element.<br />getElementsByClassName()</td>
+						<td>string (a CSS class)</td>
+						<td>array of DOM elements</td>
+						<td>version 1.5+<br />simple analogue to getElementsByTagName()</td>
+					</tr>	
+					<tr>
+						<td>$$()</td>
+						<td>string (selector rule)</td>
+						<td>array of DOM elements</td>
+						<td>version 1.5+<br />accepts CSS selector rules, and xpath queries</td>
+					</tr>
+					<tr>
+						<td>element.select()</td>
+						<td>string (selector rule)</td>
+						<td>array of DOM elements</td>
+						<td>version 1.6<br />analogue to $$(), syntactically neater</td>
+					</tr>
+					<tr>
+						<td>element.up()<br />element.down()<br />element.next()<br />element.previous()</td>
+						<td>selector rules, counts (both optional)</td>
+						<td>DOM Element</td>
+						<td>powerful positional navigation methods, that can work with selectors</td>
+					</tr>
+				</table>
+				<div class = "text">				
+					<table class = "table_examples">
+						<tr>
+							<th>Examples</th>
+						</tr>
+						<tr>
+							<td>$(“myList”)</td>
+							<td>←</td>
+							<td>selects the element with id=myList</td>
+						</tr>
+							<td>.select(“li.new”)</td>
+							<td>←</td>
+							<td>selects all DOM elements of type &lt;LI&gt; with CSS class new within subtree beneath myList</td>
+						</tr>
+						<tr>
+							<td>$(“widget”)</td>
+							<td>←</td>
+							<td>selects element with id=”widget”</td>
+						</tr>
+						<tr>
+							<td>.down(“img div.handle”,2)</td>
+							<td>←</td>
+							<td>internally returns list of all &lt;IMG&gt; tags that are children of a DIV with CSS class handle, and returns the second one</td>
+						</tr>
+					</table>
+					<h3>Finding DOM elements using jQuery</h3>
+					<p></p>
+				</div>		
+				<table class = "table_text">
+					<tr>
+						<th>Function</th>
+						<th>arguments</th>
+						<th>returns</th>	
+						<th>notes</th>		
+					</tr>
+					<tr>
+						<td>$()</td>
+						<td>string (selector rule)</td>
+						<td>jQuery object wrapping array of elements</td>
+						<td>although only one method is listed here, jQuery is exceptionally powerful in this regard. The selector rules encompass CSS3, xpath (optional) and a range of custom selectors too!</td>
+					</tr>
+				</table>
+				<div class = "text">				
+					<table class = "table_examples">
+						<tr>
+							<th>Examples</th>
+						</tr>
+						<tr>
+							<td>$(“div”)</td>
+							<td>←</td>
+							<td>select all nodes by tag type</td>
+						</tr>
+							<td>$(“myList”)</td>
+							<td>←</td>
+							<td>select by unique id</td>
+						</tr>
+						<tr>
+							<td>$(“ul#myList li.new”)</td>
+							<td>←</td>
+							<td>complex CSS selector</td>
+						</tr>
+					</table>
+				</div>	
+				<div class="hot_tip clearfix">
+					<div class="hot_tip_hot">Hot Tip</div>
+					<div class="hot_tip_ppp">
+						<p>DOM elements can be assigned to multiple CSS classes. When finding elements using a selector mechanism, you may use the same CSS classes that determine the look of your page, or you may assign separate marker classes, i.e. CSS classes that have no visual effect on the page.</p>
+					</div>
+				</div>
+				<div class = "text">
+					<h3>Modifying the DOM</h3>
+					<p>Again, the DOM standard gives us a basic set of tools to work with, and browser vendors have effectively standardized a few more.</p>
+				</div>	
+				<table class = "table_text">
+					<tr>
+						<th>Function</th>
+						<th>arguments</th>
+						<th>returns</th>	
+						<th>notes</th>		
+					</tr>
+					<tr>
+						<td>document. <br />createElement()</td>
+						<td>string (tag name)</td>
+						<td>DOM Element</td>
+						<td rowspan = "2">create new content slowly and painfully!</td>
+					</tr>					
+					<tr>
+						<td>document.<br /> createTextNode()</td>
+						<td>string (content of node)</td>
+						<td>DOM text node</td>
+					</tr>	
+					<tr>
+						<td>element. <br />innerHTML</td>
+						<td>n/a</td>
+						<td>n/a</td>
+						<td>use the browser’s built-in HTML parser to shortcut the creation of new content</td>
+					</tr>
+					<tr>
+						<td>element.<br />appendChild()</td>
+						<td>DOM element</td>
+						<td>null</td>
+						<td>add a DOM node as child of another node</td>
+					</tr>
+					<tr>
+						<td>element.<br />removeChild()</td>
+						<td>DOM element</td>
+						<td>null</td>
+						<td>remove a child DOM node from the parent</td>
+					</tr>
+					<tr>
+						<td>element.<br /> insertBefore()</td>
+						<td>DOM element</td>
+						<td>null</td>
+						<td>add a DOM node in relation to other siblings, not just at the end</td>
+					</tr>
+				</table>	
+				<div class = "text">
+					<h3>Modifying the DOM with Prototype</h3>
+					<p>Prototype favors the use of innerHTML to modify the DOM. It enhances this with the Insertion namespace, and, more recently, an insert method on the DOM element class itself.</p>
+				</div>	
+				<table class = "table_text">
+					<tr>
+						<th>Function</th>
+						<th>arguments</th>	
+						<th>notes</th>		
+					</tr>
+					<tr>
+						<td>Insertion.Top<br />Insertion.Bottom<br />Insertion.Before<br />Insertion.After</td>
+						<td>DOM element, string (HTML content)</td>
+						<td>version 1.5: Object that inserts HTML content into element alongside existing content</td>
+					</tr>					
+					<tr>
+						<td>Element.update()</td>
+						<td>string (HTML content)</td>
+						<td>version 1.6: overwrites content in element</td>
+					</tr>	
+					<tr>
+						<td>Element.insert()</td>
+						<td>HTML content or hash of content</td>
+						<td>version 1.6: Can insert a single piece of content, or multiple pieces in one go</td>
+					</tr>
+					<tr>
+						<td>Element.remove()</td>
+						<td>none</td>
+						<td>all versions: removes the calling element (and its children) from the page</td>
+					</tr>
+				</table>	
+				<div class = "text">
+					<p>Prototype provides no support for building DOM elements programmatically, but the Scriptaculous library adds a DOMBuilder object to the mix.</p>
+					<h3>Modifying the DOM with jQuery</h3>
+					<p>jQuery is based around selecting sets of DOM elements, and it provides methods for manipulating sets of DOM elements in bulk. (These can be used on sets of one element too!) The methods here all operate on a set of DOM nodes returned from a selector.</p>
+				</div>	
+				<table class = "table_text">
+					<tr>
+						<th>Function</th>
+						<th>arguments</th>	
+						<th>notes</th>		
+					</tr>
+					<tr>
+						<td>$.html()</td>
+						<td>string (HTML content)</td>
+						<td>simple wrapper around innerHTML, will duplicate content for each element in the set</td>
+					</tr>					
+					<tr>
+						<td>$.append()<br />$.prepend()<br />$.before()<br />$.after()</td>
+						<td>string (HTML content)</td>
+						<td>insert content into node(s) alongside existing content</td>
+					</tr>	
+					<tr>
+						<td>$.appendTo()<br />$.prependTo()<br />$.insertBefore()<br />$.insertAfter()</td>
+						<td>string (selector rule) or DOM element</td>
+						<td>argument is the target element or elements, to which the current node will be moved to. If multiple targets are present, the nodes being appended will be copied to each one</td>
+					</tr>
+					<tr>
+						<td>$.remove()</td>
+						<td>none</td>
+						<td>remove all elements in set from the page</td>
+					</tr>
+					<tr>
+						<td>$.empty()</td>
+						<td>none</td>
+						<td>empty all elements in the set of their content</td>
+					</tr>
+					<tr>
+						<td>$.wrap()</td>
+						<td>string (HTML) or DOM element</td>
+						<td>wrap each element in set individually with a copy of the content provided in argument</td>
+					</tr>
+					<tr>
+						<td>$.wrapAll()</td>
+						<td>string (HTML) or DOM element</td>
+						<td>wrap all elements in the set as a single unit with the content provided in argument</td>
+					</tr>
+				</table>	
+				<h2>WIDGETS VS. BEHAVIORS</h2>
+				<div class = "text">
+					<p>Both jQuery and Prototype (and its sister Scriptaculous) tend towards a style of UI called Unobtrusive Javascript, in which the content of the page is declared as HTML, and subsequently made interactive. Selectors play an important role in this approach, in locating the elements to which to add behavior. There is an alternative approach to developing Ajax UIs, much more akin to desktop application development, in which the DOM elements are created programmatically by javascript components, which the designer then wires together using layouts and containers. Qooxdoo and Ext2 are both examples of this style of UI development.</p>
+				</div>	
+				<h2>TOOLS OF THE TRADE</h2>
+				<div class = "text">
+					<p>In an ideal world, choosing the right framework makes development a breeze, but in practice, you’ll need to go under the hood from time to time to figure out what’s going on. We recommend the following tools to keep your Ajax development on track.</p>
+				</div>	
+				<table class = "table_text">
+					<tr>
+						<td>FireBug</td>
+						<td>FF</td>
+						<td>www.getfirebug.com</td>
+						<td>Swiss army knife for developers, incorporating DOM & CSS inspector, interactive debugger, network monitor and profiler.</td>
+					</tr>
+					<tr>
+						<td>Web Developers Toolkit</td>
+						<td>IE</td>
+						<td>searchmicrosoft.com</td>
+						<td>Closest thing to Firebug for IE, minus the debugger.</td>
+					</tr>
+					<tr>
+						<td>Script Debugger</td>
+						<td>IE</td>
+						<td>searchmicrosoft.com</td>
+						<td>Free Javascript debugger for IE, (also check out Visual Studio express’ debugger).</td>
+					</tr>
+					<tr>
+						<td>Fiddler</td>
+						<td>IE/any</td>
+						<td>www.fiddlertool.com</td>
+						<td>Powerful network monitor with programmable interface for modifying requests in many ways. Tight integration with IE, but can work with any browser.</td>
+					</tr>
+					<tr>
+						<td>LiveHTTP Headers</td>
+						<td>FF</td>
+						<td>livehttpheaders.mozdev.org</td>
+						<td>Network monitor extension for Firefox.</td>
+					</tr>
+					<tr>
+						<td>JSUnit</td>
+						<td>any</td>
+						<td>www.jsunit.net</td>
+						<td>The original unit testing framework for Javascript.</td>
+					</tr>
+					<tr>
+						<td>Selenium</td>
+						<td>FF/any</td>
+						<td>www.openqa.org</td>
+						<td>Powerful unit testing tool for Javascript, featuring interactive test recorder IDE (Firefox only) and browser automation tool (most browsers).</td>
+					</tr>
+					<tr>
+						<td>YSlow</td>
+						<td>FF</td>
+						<td>developer.yahoo.com/yslow</td>
+						<td>Comprehensive performance analysis for web pages, runs as a plugin to Firebug!</td>
+					</tr>
+					<tr>
+						<td>Tamper Data</td>
+						<td>FF</td>
+						<td>http://addons.mozilla.org/en-US/firefox/addon/966</td>
+						<td>modify HTTP/HTTPS headers and post parameters.</td>
+					</tr>	
+				</table>				
+			</div>
+			<div class = "end clearfix" >
+				<div class = "end_text">
+					<h3>Article taken from the site <a href = "http://refcardz.dzone.com" target = "_blank">DZone</a><br />
+					Written by Dave Crane.</h3>
+				</div>
+				<div>	
+					<a href = "http://refcardz.dzone.com" target = "_blank">
+						<img src = "../images/aljax/image3.jpg"></img>
+					</a>
+				<div>
+				
+				</div>
 			</div>
 		</div>
 	</body>
